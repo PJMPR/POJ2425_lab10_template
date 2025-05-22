@@ -14,7 +14,7 @@ Biblioteka umożliwia:
 * Uruchamianie zadań w osobnych wątkach
 * Zastosowanie wzorca projektowego Obserwator
 
-## 🪡 Struktura projektu
+## 🧠 Struktura projektu
 
 ### 1. Interfejs `Job`
 
@@ -84,9 +84,15 @@ Zdarzenie reprezentujące zmianę czasu, wykorzystywane przez harmonogram.
 4. Scheduler uruchamia zadanie w osobnym wątku, jeśli to odpowiedni czas
 5. Po wykonaniu określonej liczby powtórzeń zadanie nie jest już uruchamiane
 
-## 💡 Dodatkowe pomysły
+## 🏠 Praca domowa
 
-* Logowanie wykonanych zadań do pliku
-* Ustawienie daty startu
-* Anulowanie zaplanowanego zadania
-* GUI (np. Swing) wizualizujące harmonogram
+Po ukończeniu podstawowej wersji projektu, przygotuj rozszerzenia, które dodatkowo utrwalą wiedzę z zakresu programowania obiektowego, wzorców projektowych oraz wielowątkowości.
+
+Zaproponowane rozszerzenia do realizacji jako praca domowa:
+
+* Zaimplementuj mechanizm logowania wykonanych zadań do pliku tekstowego.
+* Dodaj możliwość ustawienia konkretnej daty i godziny rozpoczęcia wykonywania zadania.
+* Dodaj funkcję anulowania zaplanowanego zadania przed jego zakończeniem.
+* (Dla chętnych) Zaimplementuj prosty interfejs graficzny (np. w bibliotece Swing), który wizualizuje aktualny harmonogram zadań oraz umożliwia ich dodawanie/usuwanie.
+
+##
