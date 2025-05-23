@@ -1,98 +1,35 @@
-# Harmonogram zadań - biblioteka do planowania i uruchamiania zadań cyklicznych
+# ✨ Zadanie: Harmonogram Zadań
 
-## 🎯 Cel projektu
+## 🌐 Cel projektu
 
-Zaprojektowanie i zaimplementowanie biblioteki, która umożliwia definiowanie, planowanie i wykonywanie zadań (`Job`) w oparciu o zdarzenia czasowe, z zastosowaniem wzorca projektowego **Obserwator (Observer)**.
+Twoim celem jest stworzenie prostego systemu zarządzania harmonogramem zadań, który może być łatwo wykorzystany jako biblioteka w różnych projektach informatycznych.
 
-## 📆 Opis funkcjonalności
+## 🔧 Funkcjonalności biblioteki
 
-Biblioteka umożliwia:
+Biblioteka powinna umożliwiać:
 
-* Definiowanie zadań (interfejs `Job`)
-* Planowanie zadań z określonym interwałem i liczbą powtórzeń (interfejs `JobScheduler` i klasa `SimpleJobScheduler`)
-* Reagowanie na zdarzenia zmiany czasu (`TimeEvent`)
-* Uruchamianie zadań w osobnych wątkach
-* Zastosowanie wzorca projektowego Obserwator
+* ✏️ **Definiowanie zadań** poprzez interfejs `Job`, zawierający logikę wykonywanego zadania.
+* ⏰ **Określanie harmonogramu** wykonania zadań:
 
-## 🧠 Struktura projektu
+  * kiedy rozpocząć,
+  * co jaki czas powtarzać,
+  * ile razy wykonać.
+    Umożliwia to interfejs `JobScheduler` oraz jego implementacja `SimpleJobScheduler`.
+* 🌌 **Reagowanie na upływ czasu** dzięki klasie `TimeEvent`, reprezentującej zdarzenia czasowe.
+* 🚀 **Równoczesne wykonywanie zadań** – zadania i scheduler powinny działać w osobnych wątkach, zapewniając płynne działanie programu.
 
-### 1. Interfejs `Job`
+## 🔄 Wykorzystane wzorce projektowe
 
-```java
-public interface Job {
-    void execute();
-}
-```
+Projekt powinien wykorzystywać następujące wzorce:
 
-Reprezentuje pojedyncze zadanie. Implementacje zawierają logikę do wykonania (np. wydruk, zapis do pliku).
+* 🧰 **Singleton** – zapewnia istnienie tylko jednej instancji np. rejestru zadań.
 
----
+  * → [Opis wzorca Singleton](https://refactoring.guru/pl/design-patterns/singleton)
+* 🛡️ **Obserwator (Observer)** – umożliwia rejestrację zadań jako "nasłuchujących" zdarzeń czasowych.
 
-### 2. Interfejs `JobScheduler`
-
-```java
-public interface JobScheduler {
-    void schedule(Job job, int intervalSeconds, int repeatCount);
-    void start();
-    void stop();
-}
-```
-
-Umożliwia planowanie zadań z podanym interwałem czasowym i liczbą powtórzeń.
+  * → [Opis wzorca Obserwator](https://refactoring.guru/pl/design-patterns/observer)
 
 ---
 
-### 3. Klasa `SimpleJobScheduler`
+Dobrze zaprojektowana biblioteka będzie stanowić solidną podstawę do dalszego rozszerzania i integracji z bardziej zaawansowanymi systemami.
 
-* Implementuje `JobScheduler`
-* Przechowuje listę zaplanowanych zadań
-* Uruchamia zadania w osobnych wątkach
-* Obsługuje zdarzenia czasowe generowane przez wewnętrzny zegar
-
----
-
-### 4. Klasa `TimeEvent`
-
-```java
-public class TimeEvent {
-    private final LocalDateTime currentTime;
-
-    public TimeEvent(LocalDateTime currentTime) {
-        this.currentTime = currentTime;
-    }
-
-    public LocalDateTime getCurrentTime() {
-        return currentTime;
-    }
-}
-```
-
-Zdarzenie reprezentujące zmianę czasu, wykorzystywane przez harmonogram.
-
----
-
-### 5. Wzorzec projektowy: Obserwator
-
-* Obserwatorzy nasłuchują zdarzeń typu `TimeEvent` generowanych przez `Clock`
-* Każde zadanie może być zarejestrowane jako nasłuchujące określonych momentów czasowych
-
-## 🔄 Przykładowy scenariusz
-
-1. Implementacja klasy `PrintJob implements Job`, która wypisuje tekst
-2. Zaplanowanie zadania w `SimpleJobScheduler` na 5 powtórzeń co 2 sekundy
-3. `Clock` generuje `TimeEvent` co sekundę
-4. Scheduler uruchamia zadanie w osobnym wątku, jeśli to odpowiedni czas
-5. Po wykonaniu określonej liczby powtórzeń zadanie nie jest już uruchamiane
-
-## 🏠 Praca domowa
-
-Po ukończeniu podstawowej wersji projektu, przygotuj rozszerzenia, które dodatkowo utrwalą wiedzę z zakresu programowania obiektowego, wzorców projektowych oraz wielowątkowości.
-
-Zaproponowane rozszerzenia do realizacji jako praca domowa:
-
-* Zaimplementuj mechanizm logowania wykonanych zadań do pliku tekstowego.
-* Dodaj możliwość ustawienia konkretnej daty i godziny rozpoczęcia wykonywania zadania.
-* Dodaj funkcję anulowania zaplanowanego zadania przed jego zakończeniem.
-* (Dla chętnych) Zaimplementuj prosty interfejs graficzny (np. w bibliotece Swing), który wizualizuje aktualny harmonogram zadań oraz umożliwia ich dodawanie/usuwanie.
-
-##
